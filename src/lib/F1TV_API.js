@@ -15,11 +15,12 @@ export default {
   authenticate: (username, password, reece) => {
     document.cookie = "reese84=" + reece;
     if (process.env.IS_ELECTRON) {
+      console.log("IS_ELEC");
       return axios.post(
         "https://api.formula1.com/v2/account/subscriber/authenticate/by-password",
         {
           Login: username,
-          Password: password
+          Password: password,
         },
         {
           headers: {
@@ -30,6 +31,7 @@ export default {
         }
       );
     } else {
+      console.log("IS_NON_ELEC");
       return axios.post(process.env.VUE_APP_NETLIFY ? "/.netlify/functions/server/authenticate" : "/authenticate", {
         Login: username,
         Password: password,

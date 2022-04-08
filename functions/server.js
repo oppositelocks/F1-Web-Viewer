@@ -62,44 +62,26 @@ app.post(
 );
 
 if (!process.env.AWS_EXECUTION_ENV) {
-  const cors_proxy = require("cors-anywhere").createServer({
+  const cors_proxy = require("cors-for-dev").createServer({
     originWhitelist: [],
     requireHeaders: [],
-    removeHeaders: []
+    removeHeaders: [],
+    allowCredentials: true,
   });
 
   app.all("/proxy/:url*", (req, res) => {
     req.url = req.url.replace("/proxy/", "/");
-
-    if (req.headers.playtoken) {
-      req.headers.cookie = `playToken=${req.headers.playtoken}`;
+    res._writeHead = res.writeHead
+    res.writeHead = (a, b, c) => {
+      const headers = res.getHeaders();
+      if (headers['set-cookie']) {
+        const { location } = req.corsAnywhereRequestState;
+        const patched = headers['set-cookie'][0].replaceAll("Path=", `Path=/proxy/${location.protocol}//${location.host}`)
+        res.set('set-cookie', patched)
+      }
+      res._writeHead(a, b, c);
     }
-
     cors_proxy.emit("request", req, res);
-  });
-
-  app.get("/playToken", async (req, res) => {
-    const url = req.query.url;
-
-    if (!url) {
-      res.status(400).send("Unable to get playToken without a URL");
-    }
-
-    try {
-      const data = await fetch(url, {
-        method: "HEAD"
-      });
-
-      const playToken = data.headers.get("set-cookie").split(";")[0].split("=")[1];
-
-      res.status(data.status).json({
-        playToken
-      });
-    } catch (err) {
-      console.error(err);
-
-      res.status(500).json(err);
-    }
   });
 
   app.listen(PORT, () => console.info(`Server running on port ${PORT}`));

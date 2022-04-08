@@ -1,13 +1,27 @@
 <template>
-  <div class="level is-mobile">
-    <div class="level-left">
-      <div class="level-item">
-        <BaseIconButton class="gitHub" @click="openGitHub" icon="ri-github-fill" />
+  <div>
+    <div class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <BaseIconButton class="gitHub" @click="openGitHub" icon="ri-github-fill" />
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <div class="version">Version {{ version }}</div>
+        </div>
       </div>
     </div>
-    <div class="level-right">
-      <div class="level-item">
-        <div class="version">Version {{ version }}</div>
+    <div class="level is-mobile ">
+      <div class="level-left">
+        <div class="level-item">
+          forked version
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item self-host">
+          <a href="https://github.com/iebb/F1WebViewer-SelfHosted">self-host your own instance</a>
+        </div>
       </div>
     </div>
   </div>
@@ -51,5 +65,10 @@
 
   .gitHub:hover {
     opacity: 0.5;
+  }
+
+  .self-host {
+    font-size: 14px;
+    text-align: right;
   }
 </style>

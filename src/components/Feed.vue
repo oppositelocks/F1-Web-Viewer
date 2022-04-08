@@ -25,6 +25,17 @@
       <BaseIconButton icon="ri-close-line" @click="$emit('delete')" />
     </div>
     <video ref="videoPlayer" class="video-js vjs-fill no-drag vjs-tech" :class="{ hide: !initialized }" />
+    <notifications position="bottom right" width="100%">
+      <template v-slot="{ item, close }">
+        <div class="notification is-danger">
+          <p class="title">
+            {{ item.title }}
+          </p>
+          <button class="delete" @click="close" />
+          <div v-html="props.item.text"/>
+        </div>
+      </template>
+    </notifications>
   </div>
 </template>
 
@@ -139,6 +150,13 @@
             } else {
               this.player.src(url);
             }
+          } else if (res.data.errorDescription) {
+            this.$notify({
+              title: res.data.errorDescription,
+              text: res.data.message,
+              type: 'error',
+              duration: 30000,
+            })
           }
         } catch (err) {
           console.error(err);
