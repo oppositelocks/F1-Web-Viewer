@@ -12,7 +12,7 @@ const getVideoQuery = () => {
 };
 
 export default {
-  authenticate: (username, password) => {
+  authenticate: (username, password, reece) => {
     if (process.env.IS_ELECTRON) {
       return axios.post(
         "https://api.formula1.com/v2/account/subscriber/authenticate/by-password",
@@ -30,7 +30,8 @@ export default {
     } else {
       return axios.post(process.env.VUE_APP_NETLIFY ? "/.netlify/functions/server/authenticate" : "/authenticate", {
         Login: username,
-        Password: password
+        Password: password,
+        Cookie: "reese84=" + reece,
       });
     }
   },
@@ -80,7 +81,7 @@ export default {
     return api.get(`3.0/R/ENG/${getStreamType()}/ALL/CONTENT/VIDEO/${contentId}/F1_TV_Pro_Annual/2`);
   },
   getAuthenticatedUrl: (url, token) => {
-    return api.get(`1.0/R/ENG/${getStreamType()}/ALL/${url}`, {
+    return api.get(`2.0/R/ENG/${getStreamType()}/ALL/${url}`, {
       headers: {
         ascendontoken: token
       }

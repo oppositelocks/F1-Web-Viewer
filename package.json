@@ -38,6 +38,7 @@
     "serverless-http": "^2.7.0",
     "uuid": "^8.3.2",
     "video.js": "^7.19.0",
+    "videojs-contrib-eme": "^4.0.0",
     "videojs-contrib-quality-levels": "^2.1.0",
     "videojs-http-source-selector": "^1.1.6",
     "vue": "^2.6.11",

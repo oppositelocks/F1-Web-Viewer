@@ -110,7 +110,10 @@ export default new Vuex.Store({
     },
     async authenticate({ commit }, credentials) {
       try {
-        const res = await F1TV_API.authenticate(credentials.username, credentials.password);
+        const e = new window.reese84.Protection;
+        e.start();
+        const reeceToken = await e.token();
+        const res = await F1TV_API.authenticate(credentials.username, credentials.password, reeceToken);
 
         if (res.status === 200) {
           commit("updateToken", res.data.data.subscriptionToken);

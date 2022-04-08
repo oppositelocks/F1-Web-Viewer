@@ -31,7 +31,7 @@
       Login
     </button>
     <p class="content">
-      <b>NOTE:</b> Credentials are ONLY sent to F1TV. For more information, refer to the
+      <b>NOTE:</b> This login involves processing of reese84 cookie, which is experimental and may break at any time.
       <a :href="homepage">F1 Web Viewer</a> GitHub repository
     </p>
   </form>

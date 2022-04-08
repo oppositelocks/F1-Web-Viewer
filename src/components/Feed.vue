@@ -24,7 +24,7 @@
       />
       <BaseIconButton icon="ri-close-line" @click="$emit('delete')" />
     </div>
-    <video ref="videoPlayer" class="video-js vjs-fill no-drag" :class="{ hide: !initialized }" />
+    <video ref="videoPlayer" class="video-js vjs-fill no-drag vjs-tech" :class="{ hide: !initialized }" />
   </div>
 </template>
 
@@ -32,6 +32,7 @@
   import videojs from "video.js";
   import { mapGetters } from "vuex";
 
+  import "videojs-contrib-eme";
   import "videojs-contrib-quality-levels";
   import "videojs-http-source-selector";
 
@@ -98,6 +99,7 @@
       async initPlayer() {
         this.player = videojs(this.$refs.videoPlayer, this.options);
         this.player.httpSourceSelector();
+        this.player.eme();
 
         this.player.on("loadeddata", () => {
           const tracks = this.player.remoteTextTracks();
@@ -116,30 +118,22 @@
         if (!this.token) return;
         try {
           const res = await F1TV_API.getAuthenticatedUrl(this.playbackUrl, this.token);
-
           if (this.player && res.data?.resultObj?.url) {
             let url = res.data.resultObj.url;
             if (process.env.VUE_APP_NETLIFY) {
               url = "https://cors.bridged.cc/" + url;
             } else if (!process.env.IS_ELECTRON) {
-              const res = await F1TV_API.playToken(url);
-              this.player.on("loadstart", () => {
-                this.player.tech({ IWillNotUseThisInPlugins: true }).vhs.xhr.beforeRequest = options => {
-                  options.headers = {
-                    playToken: res.data.playToken,
-                    ...options.headers
-                  };
-                  return options;
-                };
-              });
               url = "/proxy/" + url;
             }
-            if (res.data.resultObj.streamType === "DASH") {
+            if (res.data.resultObj.streamType === "DASH" || res.data.resultObj.streamType === "DASHWV") {
               this.player.src({
                 src: url,
                 type: 'application/dash+xml',
                 keySystems: {
-                  "com.widevine.alpha": res.data.resultObj.laURL
+                  'com.widevine.alpha': "/proxy/" + res.data.resultObj.laURL
+                },
+                emeHeaders: {
+                  ascendontoken: this.token
                 }
               });
             } else {
