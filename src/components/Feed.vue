@@ -112,15 +112,6 @@
         this.player.httpSourceSelector();
         this.player.eme();
 
-        this.player.on("loadeddata", () => {
-          const tracks = this.player.remoteTextTracks();
-          for (let i = 0; i < tracks.length; i++) {
-            if (tracks[i].kind === "subtitles") {
-              tracks[i].mode = "hidden";
-            }
-          }
-        });
-
         this.initialized = true;
 
         this.updateSource();
@@ -143,6 +134,8 @@
                 keySystems: {
                   'com.widevine.alpha': "/proxy/" + res.data.resultObj.laURL
                 },
+                audioRobustness: 'SW_SECURE_CRYPTO',
+                videoRobustness: 'SW_SECURE_CRYPTO',
                 emeHeaders: {
                   ascendontoken: this.token
                 }
