@@ -94,6 +94,12 @@
             h: 1,
             i: this.dragPos.i,
             options: {
+              html5: {
+                vhs: {
+                  useNetworkInformationApi: true,
+                  useDtsForTimestampOffset: true,
+                }
+              },
               controls: true,
               muted: true,
               liveui: true,
