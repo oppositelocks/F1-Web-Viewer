@@ -96,8 +96,10 @@
             options: {
               html5: {
                 vhs: {
-                  useNetworkInformationApi: true,
+                  blacklistDuration: 1,
+                  cacheEncryptionKeys: true,
                   useDtsForTimestampOffset: true,
+                  allowSeeksWithinUnsafeLiveWindow: true,
                 }
               },
               controls: true,
