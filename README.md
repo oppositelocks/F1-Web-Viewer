@@ -4,6 +4,44 @@
 [![CircleCI Build Status](https://circleci.com/gh/bootsie123/F1-Web-Viewer/tree/production.svg?style=svg)](https://circleci.com/gh/bootsie123/F1-Web-Viewer/tree/production)
 [![GitHub](https://img.shields.io/github/license/bootsie123/F1-Web-Viewer)](https://github.com/bootsie123/F1-Web-Viewer/blob/master/LICENSE)
 
+### Original Project
+[bootsie123's F1 Web Viewer](https://github.com/bootsie123/F1-Web-Viewer/)
+
+# Tutorial
+
+There are 3 currently-working methods of using this project.
+
+1. **Public Website**
+   * No need to setup
+   * Bandwidth might be limited
+   * US Content Schedule (Wouldn't get after-midnight replays if you have a San Marino F1TV Access Plan)
+
+   Website is accessible at https://f1tv.ieb.systems/, hosted on Deta.sh
+   
+   Note the 1080p50 is disabled for HLS streams as segements might exceed the 5.5M limit.
+
+2. **Reverse Proxy**
+   * Download a single executable
+   * Use your own connection for content
+
+   Download the client for your OS at https://github.com/iebb/F1WebViewer-SelfHosted
+   
+   Run it locally and it would open a browser, or on a server and open http://[server-ip]:13331/ to watch.
+   
+   Note the availability of F1TV Access / Pro depends on your server location.
+
+3. **Running Locally**
+   * Customize everything 
+   * Requires some technical knowledge
+
+   Check the *Installation* part on the bottom.
+
+
+
+---
+## The original README
+
+
 # **IMPORTANT** - Live website currently broken
 
 ### Please self host the application locally or through Docker. Or alternatively, use the desktop application. Updates can be found under issue [#35](https://github.com/bootsie123/F1-Web-Viewer/issues/35) (last updated 2/20/22)
