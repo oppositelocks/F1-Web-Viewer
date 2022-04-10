@@ -122,9 +122,7 @@
           const res = await F1TV_API.getAuthenticatedUrl(this.playbackUrl, this.token);
           if (this.player && res.data?.resultObj?.url) {
             let url = res.data.resultObj.url;
-            if (process.env.VUE_APP_NETLIFY) {
-              url = "https://cors.bridged.cc/" + url;
-            } else if (!process.env.IS_ELECTRON) {
+            if (!process.env.IS_ELECTRON) {
               url = "/proxy/" + url;
             }
             if (res.data.resultObj.streamType === "DASH" || res.data.resultObj.streamType === "DASHWV") {

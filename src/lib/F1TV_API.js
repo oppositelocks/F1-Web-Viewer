@@ -13,11 +13,9 @@ const getVideoQuery = () => {
 
 export default {
   authenticate: (username, password, reece) => {
-    document.cookie = "reese84=" + reece;
     if (process.env.IS_ELECTRON) {
-      console.log("IS_ELEC");
       return axios.post(
-        "https://api.formula1.com/v2/account/subscriber/authenticate/by-password",
+        "https://f1tokenx.deta.dev/authenticate", // required to send cookies
         {
           Login: username,
           Password: password,
@@ -26,12 +24,12 @@ export default {
           headers: {
             apiKey: "fCUCjWrKPu9ylJwRAv8BpGLEgiAuThx7",
             "Content-Type": "application/json",
-            Cookie: "reese84=" + reece,
+            "x-cookie": "reese84=" + reece,
           }
         }
       );
     } else {
-      console.log("IS_NON_ELEC");
+      document.cookie = "reese84=" + reece;
       return axios.post(process.env.VUE_APP_NETLIFY ? "/.netlify/functions/server/authenticate" : "/authenticate", {
         Login: username,
         Password: password,

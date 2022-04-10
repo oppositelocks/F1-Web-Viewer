@@ -44,9 +44,9 @@ app.post(
           Password: req.body.Password
         }),
         headers: {
-          "User-Agent": "RaceControl f1viewer",
           apiKey: "fCUCjWrKPu9ylJwRAv8BpGLEgiAuThx7",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Cookie": req.headers['cookie'],
         }
       });
 
