@@ -175,8 +175,7 @@
 
   .channel {
     margin-bottom: 0.5em;
-    padding: 5px;
-    padding-left: 0.5em;
+    padding: 5px 0.5em;
     border-left: 5px solid;
   }
 
