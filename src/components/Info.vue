@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="infobox">
     <div class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
@@ -49,6 +49,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .infobox {
+    height: 64px;
+  }
+
   .level {
     position: absolute;
     width: 100%;

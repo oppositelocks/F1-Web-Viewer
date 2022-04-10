@@ -14,7 +14,7 @@
       isResizable
       :margin="[0, 0]"
       :colNum="layoutColumns || 12"
-      :rowHeight="layoutRowHeight || 150"
+      :rowHeight="layoutRowHeight || Math.round(screen.height / 12)"
       @layout-updated="layoutUpdated"
     >
       <grid-item

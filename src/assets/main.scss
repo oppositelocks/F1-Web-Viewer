@@ -3,9 +3,14 @@
 @import "~video.js/dist/video-js.css";
 @import "~videojs-http-source-selector/dist/videojs-http-source-selector.css";
 @import "~mobile-drag-drop/default.css";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
 
 html {
   overflow-y: auto;
+}
+
+body, button, input, optgroup, select, textarea {
+  font-family: 'Rubik', sans-serif;
 }
 
 .font-resize-medium-small {

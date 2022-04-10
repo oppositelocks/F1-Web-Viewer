@@ -5,7 +5,7 @@
     <BaseNumberInput label="Layout Columns" placeholder="12" type="number" :min="1" v-model.number="layoutColumns" />
     <BaseNumberInput
       label="Layout Row Height (pixels)"
-      placeholder="150"
+      placeholder="120"
       type="number"
       :min="1"
       v-model.number="layoutRowHeight"

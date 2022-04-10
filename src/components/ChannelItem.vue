@@ -1,22 +1,45 @@
 <template>
   <div
     class="channel"
+    :class='channel.type === "additional" ? "" : "channel-driver"'
     draggable="true"
     unselectable="on"
     :style="{ 'border-color': channel.hex }"
     @drag="drag"
     @dragend="dragEnd"
   >
-    {{ channel.type === "additional" ? channel.title : channel.driverFirstName + " " + channel.driverLastName }}
+    <div v-if='channel.type === "additional"'>
+      {{ channel.title }}
+      <BaseIconButton
+        class="button is-pulled-right"
+        icon="ri-fullscreen-line"
+        round
+        @click="replaceFullscreen"
+      />
+    </div>
+    <div v-else>
+      <span class="driver-tag">{{ channel.racingNumber }} {{ channel.title }}</span>
+      <span class="driver-name">{{ channel.driverFirstName }} {{ channel.driverLastName }}</span>
+      <BaseIconButton
+        class="button is-pulled-right"
+        icon="ri-fullscreen-line"
+        round
+        @click="replaceFullscreen"
+      />
+    </div>
   </div>
 </template>
 
 <script>
   import { v4 as uuidv4 } from "uuid";
   import { mapGetters, mapActions } from "vuex";
+  import BaseIconButton from "@/components/BaseIconButton";
 
   export default {
     name: "ChannelItem",
+    components: {
+      BaseIconButton
+    },
     props: {
       channel: {
         type: Object,
@@ -90,8 +113,8 @@
           newLayout.push({
             x: this.dragPos.x,
             y: this.dragPos.y,
-            w: 1,
-            h: 1,
+            w: 2,
+            h: 2,
             i: this.dragPos.i,
             options: {
               controls: true,
@@ -112,6 +135,27 @@
           this.$root.$refs.gridLayout.dragEvent("dragend", this.dragPos.x, this.dragPos.y, 1, 1);
         }
       },
+      replaceFullscreen() {
+        const gridLayout = this.$root.$refs.gridLayout;
+        const props = gridLayout.$options.propsData;
+        this.setLayout([{
+          x: 0,
+          y: 0,
+          w: props.colNum,
+          h: Math.floor(window.innerHeight / props.rowHeight),
+          i: 0,
+          options: {
+            controls: true,
+            muted: true,
+            liveui: true,
+            preload: "auto",
+            crossOrigin: "anonymous",
+          },
+          playbackUrl: this.channel.playbackUrl,
+          title: this.channel.title,
+          live: this.channel.live
+        }]);
+      },
       dragOver(e) {
         this.mousePos.x = e.clientX;
         this.mousePos.y = e.clientY;
@@ -128,11 +172,18 @@
 </script>
 
 <style lang="scss" scoped>
+
   .channel {
     margin-bottom: 0.5em;
     padding: 5px;
     padding-left: 0.5em;
-    border-left: 3px solid;
+    border-left: 5px solid;
+  }
+
+  .channel-driver {
+    padding: 2px 0.5em;
+    width: 50%;
+    float: left;
   }
 
   .channel:hover {
@@ -143,4 +194,10 @@
   .channel:active {
     cursor: grabbing;
   }
+
+  .driver-tag {
+    display: block;
+    font-size: 14px;
+  }
+
 </style>

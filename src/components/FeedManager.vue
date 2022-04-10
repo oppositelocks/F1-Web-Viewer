@@ -211,27 +211,10 @@
 
           if (container.metadata.additionalStreams) {
             const isLive = container.metadata.contentSubtype === "LIVE";
-
-            const mappedChannels = channels.data.resultObj.containers[0].metadata.additionalStreams.map(channel => {
-              return {
-                driverFirstName: channel.driverFirstName,
-                driverLastName: channel.driverLastName,
-                title: channel.title,
-                playbackUrl: channel.playbackUrl,
-                hex: channel.hex,
-                type: channel.type,
-                live: isLive
-              };
-            });
-
-            mappedChannels.push({
-              title: "WORLD",
-              type: "additional",
-              playbackUrl: `CONTENT/PLAY?contentId=${container.contentId}`,
+            this.channels = channels.data.resultObj.containers[0].metadata.additionalStreams.map(channel => ({
+              ...channel,
               live: isLive
-            });
-
-            this.channels = mappedChannels;
+            }));
           } else {
             this.channels = [
               {

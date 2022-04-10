@@ -1,7 +1,10 @@
 <template>
-  <div class="container" v-if="channelsSorted.length > 0">
+  <div style="clear: both">
     <h2 class="subtitle has-text-centered">Channels</h2>
-    <ChannelItem v-for="(channel, i) in channelsSorted" :key="i" :channel="channel" />
+    <div class="container">
+      <ChannelItem v-for="(channel, i) in channelsSorted" :key="i" :channel="channel" />
+    </div>
+    <div style="clear: both" />
   </div>
 </template>
 
@@ -21,33 +24,24 @@
     },
     computed: {
       channelsSorted() {
-        const onBoards = [];
         const additional = [];
-
+        const onBoards = [];
         for (let channel of this.channels) {
-          if (channel.type !== "additional") {
-            onBoards.push(channel);
-          } else {
+          if (channel.type === "additional") {
             additional.push(channel);
+          } else {
+            onBoards.push(channel);
           }
         }
 
-        this.sortByProp(onBoards, "driverLastName");
-        this.sortByProp(additional, "title");
-
-        return additional.concat(onBoards);
+        return additional.concat(onBoards.sort((val1, val2) => {
+          if (val1.teamName !== val2.teamName) {
+            return val1.teamName.localeCompare(val2.teamName);
+          }
+          return val1.racingNumber - val2.racingNumber;
+        }));
       }
     },
-    methods: {
-      sortByProp(array, prop) {
-        array.sort((val1, val2) => {
-          if (val1[prop] < val2[prop]) return -1;
-          if (val1[prop] > val2[prop]) return 1;
-
-          return 0;
-        });
-      }
-    }
   };
 </script>
 
