@@ -199,4 +199,9 @@
     font-size: 14px;
   }
 
+  @media screen and (max-width: 768px) {
+    .driver-name {
+      display: none;
+    }
+  }
 </style>
