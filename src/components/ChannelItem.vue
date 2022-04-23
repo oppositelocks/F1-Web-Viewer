@@ -117,6 +117,14 @@
             h: 2,
             i: this.dragPos.i,
             options: {
+              html5: {
+                vhs: {
+                  blacklistDuration: 1,
+                  cacheEncryptionKeys: true,
+                  useDtsForTimestampOffset: true,
+                  allowSeeksWithinUnsafeLiveWindow: true,
+                }
+              },
               controls: true,
               muted: true,
               liveui: true,
