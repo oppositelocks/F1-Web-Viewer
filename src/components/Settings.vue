@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2 class="subtitle has-text-centered">Settings</h2>
+    <BaseDropdown class="playerType" label="Player" v-model="playerType" :options="playerTypes" />
     <BaseDropdown class="streamType" label="Stream Type" v-model="streamType" :options="streamTypes" />
     <BaseNumberInput label="Layout Columns" placeholder="12" type="number" :min="1" v-model.number="layoutColumns" />
     <BaseNumberInput
@@ -75,6 +76,21 @@
             value: "MOBILE_HLS",
             disabled: true
           }
+        ],
+        playerTypes: [
+          {
+            text: "VideoJS",
+            value: "VIDEOJS",
+            selected: true,
+          },
+          {
+            text: "Clappr",
+            value: "CLAPPR",
+          },
+          {
+            text: (location.hostname === "localhost" || location.hostname === "127.0.0.1") ? "Bitmovin" : "Bitmovin (License Required)",
+            value: "BITMOVIN"
+          },
         ]
       };
     },
@@ -101,6 +117,14 @@
         },
         set(val) {
           this.setStreamType(val);
+        }
+      },
+      playerType: {
+        get() {
+          return this.$store.getters.playerType;
+        },
+        set(val) {
+          this.setPlayerType(val);
         }
       },
       ...mapGetters(["layout", "layouts"])
@@ -137,7 +161,7 @@
         this.updateLayouts(this.layouts);
       },
       ...mapActions(["addToLayouts", "setActiveLayout"]),
-      ...mapMutations(["updateLayouts", "setLayoutColumns", "setLayoutRowHeight", "setStreamType"])
+      ...mapMutations(["updateLayouts", "setLayoutColumns", "setLayoutRowHeight", "setStreamType", "setPlayerType"])
     }
   };
 </script>
@@ -153,6 +177,14 @@
   }
 
   .streamType ::v-deep.label {
+    font-weight: 500;
+  }
+
+  .playerType {
+    margin-top: 1.5em;
+  }
+
+  .playerType ::v-deep.label {
     font-weight: 500;
   }
 

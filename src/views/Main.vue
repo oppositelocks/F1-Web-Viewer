@@ -29,6 +29,31 @@
         drag-ignore-from=".no-drag"
       >
         <Feed
+          v-if="playerType === 'VIDEOJS'"
+          @togglePin="setItemStatic(i)"
+          @syncFeeds="syncFeeds"
+          @delete="deleteItem(i)"
+          @togglePlayback="togglePlayback"
+          :playbackUrl="item.playbackUrl"
+          :options="item.options"
+          :static="item.static"
+          :time="item.time"
+          :live="item.live"
+        />
+        <FeedClappr
+          v-if="playerType === 'CLAPPR'"
+          @togglePin="setItemStatic(i)"
+          @syncFeeds="syncFeeds"
+          @delete="deleteItem(i)"
+          @togglePlayback="togglePlayback"
+          :playbackUrl="item.playbackUrl"
+          :options="item.options"
+          :static="item.static"
+          :time="item.time"
+          :live="item.live"
+        />
+        <FeedBitmovin
+          v-if="playerType === 'BITMOVIN'"
           @togglePin="setItemStatic(i)"
           @syncFeeds="syncFeeds"
           @delete="deleteItem(i)"
@@ -76,6 +101,8 @@
   import { GridLayout, GridItem } from "vue-grid-layout";
   import { mapGetters, mapActions, mapMutations } from "vuex";
 
+  import FeedBitmovin from "@/components/FeedBitmovin";
+  import FeedClappr from "@/components/FeedClappr";
   import Feed from "@/components/Feed";
   import SlidePanel from "@/components/SlidePanel";
   import Login from "@/components/Login";
@@ -87,6 +114,8 @@
     name: "Main",
     components: {
       Feed,
+      FeedBitmovin,
+      FeedClappr,
       SlidePanel,
       Login,
       Info,
@@ -105,7 +134,7 @@
       };
     },
     computed: {
-      ...mapGetters(["authenticated", "layout", "layoutColumns", "layoutRowHeight"])
+      ...mapGetters(["authenticated", "layout", "layoutColumns", "layoutRowHeight", "playerType"])
     },
     methods: {
       deleteItem(i) {

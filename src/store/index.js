@@ -15,7 +15,8 @@ let savedState = {
   token: localStorage.getItem("token"),
   layoutColumns: parseInt(localStorage.getItem("layoutColumns")),
   layoutRowHeight: parseInt(localStorage.getItem("layoutRowHeight")),
-  streamType: localStorage.getItem("streamType")
+  streamType: localStorage.getItem("streamType"),
+  playerType: localStorage.getItem("playerType"),
 };
 
 if (isElectron) {
@@ -29,7 +30,8 @@ if (isElectron) {
     token: store.get("token"),
     layoutColumns: store.get("layoutColumns"),
     layoutRowHeight: store.get("layoutRowHeight"),
-    streamType: store.get("streamType")
+    streamType: store.get("streamType"),
+    playerType: store.get("playerType"),
   };
 }
 
@@ -52,7 +54,8 @@ export default new Vuex.Store({
     username: "",
     password: "",
     authError: "",
-    streamType: savedState.streamType || "BIG_SCREEN_HLS"
+    streamType: savedState.streamType || "BIG_SCREEN_HLS",
+    playerType: savedState.playerType || "VIDEOJS",
   },
   getters: {
     layouts: state => state.layouts,
@@ -63,7 +66,8 @@ export default new Vuex.Store({
     token: state => state.token,
     authError: state => state.authError,
     authenticated: state => !!state.token,
-    streamType: state => state.streamType
+    streamType: state => state.streamType,
+    playerType: state => state.playerType,
   },
   actions: {
     setLayout({ commit, dispatch }, layout) {
@@ -162,6 +166,11 @@ export default new Vuex.Store({
       state.streamType = streamType;
 
       updateStore("streamType", streamType);
+    },
+    setPlayerType(state, playerType) {
+      state.playerType = playerType;
+
+      updateStore("playerType", playerType);
     },
     setPlayback(state, playback) {
       state.playback = playback;

@@ -13,6 +13,10 @@ body, button, input, optgroup, select, textarea {
   font-family: 'Rubik', sans-serif;
 }
 
+.container {
+  max-width: inherit!important;
+}
+
 .font-resize-medium-small {
   font-size: 0.8em;
 }
