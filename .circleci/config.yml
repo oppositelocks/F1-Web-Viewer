@@ -29,8 +29,8 @@ jobs:
 
             docker buildx build --push \
             --platform linux/amd64,linux/arm/v7,linux/arm64 \
-            -t bootsie123/f1-web-viewer:latest \
-            -t bootsie123/f1-web-viewer:v$(node -p -e "require('./package.json').version") \
+            -t iebb/f1-web-viewer:latest \
+            -t iebb/f1-web-viewer:v$(node -p -e "require('./package.json').version") \
             . \
 
   electron-release-osx:
