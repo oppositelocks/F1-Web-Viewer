@@ -120,7 +120,13 @@ export default new Vuex.Store({
         const res = await F1TV_API.authenticate(credentials.username, credentials.password, reeceToken);
 
         if (res.status === 200) {
-          commit("updateToken", res.data.data.subscriptionToken);
+          if (res.data.data) {
+            commit("updateToken", res.data.data.subscriptionToken);
+          } else {
+            let err = new Error(res.data.Detail);
+            commit("authError", err);
+            return Promise.reject(err);
+          }
         }
 
         return res;
