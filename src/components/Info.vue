@@ -50,7 +50,7 @@
 
 <style lang="scss" scoped>
   .infobox {
-    height: 64px;
+    height: 96px;
   }
 
   .level {

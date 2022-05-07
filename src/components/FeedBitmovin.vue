@@ -48,12 +48,13 @@
   import BaseIconButton from "@/components/BaseIconButton";
 
   const playerConfig = {
-    "key": window.PLAYER_LICENSE_KEY || localStorage.PLAYER_LICENSE_KEY || "BITMOVIN_PLAYER_LICENSE_KEY",
-    "playback": {
-      "muted": true,
-      "autoplay": false
+    key: window.PLAYER_LICENSE_KEY || localStorage.PLAYER_LICENSE_KEY || "BITMOVIN_PLAYER_LICENSE_KEY",
+    playback: {
+      muted: true,
+      autoplay: false
     },
     error: function (err) {
+      console.log(err);
       this.$notify({
         title: err.name,
         text: err.message,

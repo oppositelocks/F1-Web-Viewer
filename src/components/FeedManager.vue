@@ -2,14 +2,6 @@
   <div>
     <div class="container settings">
       <BaseDropdown
-        label="Series"
-        v-model="series"
-        :options="seriesList"
-        :disabled="seriesList.length < 2"
-        :loading="seriesLoading"
-        horizontal
-      />
-      <BaseDropdown
         label="Season"
         v-model="season"
         :options="seasons"
@@ -31,6 +23,14 @@
         :options="sessions"
         :disabled="sessions.length < 2"
         :loading="sessionsLoading"
+        horizontal
+      />
+      <BaseDropdown
+        label="Series"
+        v-model="series"
+        :options="seriesList"
+        :disabled="seriesList.length < 2"
+        :loading="seriesLoading"
         horizontal
       />
       <button class="button is-fullwidth" @click="updateSources" :disabled="channels.length < 1">
