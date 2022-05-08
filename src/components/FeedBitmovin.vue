@@ -111,7 +111,7 @@
         this.updateSource();
       },
       playback(state) {
-        if (!this.player) return;
+        if (!this.player || !this.initialized) return;
 
         if (state) {
           this.player.play();
