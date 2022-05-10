@@ -76,15 +76,15 @@ if (!process.env.AWS_EXECUTION_ENV) {
       const headers = res.getHeaders();
       if (headers['set-cookie']) {
         const { location } = req.corsAnywhereRequestState;
-        const patched = headers['set-cookie'][0].replaceAll(
+        const patched = headers['set-cookie'][0].replace(
           "Path=", `Path=/proxy/${location.protocol}//${location.host}`
-        ).replaceAll(
+        ).replace(
           /Domain=[^;]+/g, ''
-        ).replaceAll(
+        ).replace(
           /SameSite=[^;]+/g, ''
-        ).replaceAll(
+        ).replace(
           "Secure", ''
-        ).replaceAll(
+        ).replace(
           /;+/g, ';'
         )
         res.set('set-cookie', patched)
