@@ -49,7 +49,7 @@ export default new Vuex.Store({
     layout: savedState.layout || [],
     token: savedState.token || "",
     layoutColumns: savedState.layoutColumns || 12,
-    layoutRowHeight: savedState.layoutRowHeight || Math.round(screen.height / 12),
+    layoutRowHeight: savedState.layoutRowHeight || Math.round(screen.availHeight / 12),
     playback: true,
     username: "",
     password: "",
