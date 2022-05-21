@@ -1,7 +1,7 @@
 <template>
   <form class="container" @submit.prevent="submit">
     <BaseInput
-      v-if="!window.SERVER_LOGIN"
+      v-if="serverLogin"
       ref="username"
       name="Email"
       label="F1TV Email"
@@ -15,7 +15,7 @@
       required
     />
     <BaseInput
-      v-if="!window.SERVER_LOGIN"
+      v-if="serverLogin"
       ref="password"
       name="Password"
       label="F1TV Password"
@@ -51,8 +51,9 @@
     },
     data() {
       return {
-        username: "",
-        password: "",
+        serverLogin: !window.SERVER_LOGIN,
+        username: localStorage.username || "",
+        password: localStorage.password || "",
         loading: false,
         homepage: process.env.VUE_APP_HOMEPAGE
       };
@@ -64,24 +65,40 @@
       submit() {
         if (this.loading) return;
 
-        const username = this.$refs.username;
-        const password = this.$refs.password;
-
-        username.validate();
-        password.validate();
-
-        if (username.valid && password.valid) {
+        if (window.SERVER_LOGIN) {
           this.loading = true;
 
           this.$store
             .dispatch("authenticate", {
-              username: this.username,
-              password: this.password
+              username: "",
+              password: ""
             })
             .finally(() => {
               this.loading = false;
             });
+        } else {
+          const username = this.$refs.username;
+          const password = this.$refs.password;
+
+          username.validate();
+          password.validate();
+
+          if (username.valid && password.valid) {
+            this.loading = true;
+
+            this.$store
+              .dispatch("authenticate", {
+                username: this.username,
+                password: this.password
+              })
+              .finally(() => {
+                localStorage.username = username;
+                localStorage.password = password;
+                this.loading = false;
+              });
+          }
         }
+
       }
     }
   };
