@@ -1,6 +1,7 @@
 <template>
   <form class="container" @submit.prevent="submit">
     <BaseInput
+      v-if="!window.SERVER_LOGIN"
       ref="username"
       name="Email"
       label="F1TV Email"
@@ -14,6 +15,7 @@
       required
     />
     <BaseInput
+      v-if="!window.SERVER_LOGIN"
       ref="password"
       name="Password"
       label="F1TV Password"
