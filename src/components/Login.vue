@@ -92,8 +92,8 @@
                 password: this.password
               })
               .finally(() => {
-                localStorage.username = username;
-                localStorage.password = password;
+                localStorage.username = this.username;
+                localStorage.password = this.password;
                 this.loading = false;
               });
           }
