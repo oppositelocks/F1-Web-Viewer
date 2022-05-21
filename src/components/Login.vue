@@ -1,7 +1,7 @@
 <template>
   <form class="container" @submit.prevent="submit">
     <BaseInput
-      v-if="serverLogin"
+      v-if="localLogin"
       ref="username"
       name="Email"
       label="F1TV Email"
@@ -15,7 +15,7 @@
       required
     />
     <BaseInput
-      v-if="serverLogin"
+      v-if="localLogin"
       ref="password"
       name="Password"
       label="F1TV Password"
@@ -51,7 +51,7 @@
     },
     data() {
       return {
-        serverLogin: !window.SERVER_LOGIN,
+        localLogin: !window.SERVER_LOGIN,
         username: localStorage.username || "",
         password: localStorage.password || "",
         loading: false,
