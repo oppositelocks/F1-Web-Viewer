@@ -150,7 +150,7 @@
           x: 0,
           y: 0,
           w: props.colNum,
-          h: Math.floor(window.innerHeight / props.rowHeight),
+          h: Math.floor(screen.height / props.rowHeight),
           i: 0,
           options: {
             controls: true,
