@@ -51,7 +51,7 @@
     },
     data() {
       return {
-        localLogin: !window.SERVER_LOGIN,
+        localLogin: ~document.cookie.indexOf("server_side_login=1"),
         username: localStorage.username || "",
         password: localStorage.password || "",
         loading: false,
@@ -65,7 +65,7 @@
       submit() {
         if (this.loading) return;
 
-        if (window.SERVER_LOGIN) {
+        if (!~document.cookie.indexOf("server_side_login=1")) {
           this.loading = true;
 
           this.$store
