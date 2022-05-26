@@ -161,7 +161,7 @@
             { text: "Select event", ...this.defaultValues },
             ...events.data.resultObj.containers
               .filter(event => {
-                return Date.now() > new Date(event.metadata.emfAttributes.Meeting_Start_Date - 86400 * 1000);
+                return Date.now() > new Date(new Date(event.metadata.emfAttributes.Meeting_Start_Date) - 86400 * 1000);
               })
               .map(event => {
                 return {
