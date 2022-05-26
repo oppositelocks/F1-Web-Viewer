@@ -125,7 +125,7 @@
             if (!process.env.IS_ELECTRON) {
               url = "/proxy/" + url;
             }
-            if (res.data.resultObj.streamType === "DASH" || res.data.resultObj.streamType === "DASHWV") {
+            if (res.data.resultObj.streamType === "DASH" || res.data.resultObj.streamType === "DASHWV" || res.data.resultObj.streamType === "DASH6WV") {
               this.player.src({
                 src: url,
                 type: 'application/dash+xml',
