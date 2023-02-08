@@ -32,10 +32,6 @@
     <button type="submit" class="button is-success" :class="{ 'is-loading': loading }" :disabled="loading">
       Login
     </button>
-    <p class="content">
-      <b>NOTE:</b> This login involves processing of reese84 cookie, which is experimental and may break at any time.
-      <a :href="homepage">F1 Web Viewer</a> GitHub repository
-    </p>
   </form>
 </template>
 
