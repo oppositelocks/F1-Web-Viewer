@@ -6,37 +6,15 @@
 
 ### Original Project
 [bootsie123's F1 Web Viewer](https://github.com/bootsie123/F1-Web-Viewer/)
+### This project is simply a built docker container of the following fork from the above project
+[iebb/F1-Web-Viewer](https://github.com/iebb/F1-Web-Viewer)
 
 # Tutorial
 
-There are 3 currently-working methods of using this project.
-
-1. **Public Website**
-   * No need to setup
-   * Bandwidth might be limited
-   * US Content Schedule (Wouldn't get after-midnight replays if you have a San Marino F1TV Access Plan)
-
-   Website is accessible at https://f1tv.ieb.systems/, hosted on Deta.sh
-   
-   Note the 1080p50 is disabled for HLS streams as segements might exceed the 5.5M limit.
-
-2. **Reverse Proxy**
-   * Download a single executable
-   * Use your own connection for content
-
-   Download the client for your OS at https://github.com/iebb/F1WebViewer-SelfHosted
-   
-   Run it locally and it would open a browser, or on a server and open http://[server-ip]:13331/ to watch.
-   
-   Note the availability of F1TV Access / Pro depends on your server location.
-
-3. **Running Locally**
-   * Customize everything 
-   * Requires some technical knowledge
-
-   Check the *Installation* part on the bottom.
-
-
+```bash
+docker run -d -p 3000:3000 oppositelock/f1-web-viewer:latest
+```
+From there, you can then access the server on port `3000` of your Docker host. For example: `http://192.168.x.x:3000`
 
 ---
 ## The original README
