@@ -128,7 +128,6 @@
       return {
         tabs: [
           { title: "Manage Feeds", component: "FeedManager", icon: "ri-movie-line" },
-          { title: "Settings", component: "Settings", icon: "ri-settings-4-line" }
         ],
         forceBackground: false
       };
