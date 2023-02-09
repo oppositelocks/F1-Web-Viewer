@@ -63,4 +63,7 @@
     align-items: center;
     border-bottom: 1px solid #dbdbdb;
   }
+  .is-active {
+    pointer-events: none;
+  }
 </style>
