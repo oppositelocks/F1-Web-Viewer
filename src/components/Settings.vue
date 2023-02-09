@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h2 class="subtitle has-text-centered" style="display:none;">Settings</h2>
+  <div class="container" style="display:none;">
+    <h2 class="subtitle has-text-centered">Settings</h2>
     <BaseDropdown class="playerType" label="Player" v-model="playerType" :options="playerTypes" />
     <BaseDropdown class="streamType" label="Stream Type" v-model="streamType" :options="streamTypes" />
     <BaseNumberInput label="Layout Columns" placeholder="12" type="number" :min="1" v-model.number="layoutColumns" />
