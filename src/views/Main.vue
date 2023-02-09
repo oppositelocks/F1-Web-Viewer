@@ -235,4 +235,7 @@
   .forceBackground {
     background: black;
   }
+  .is-active {
+    pointer-events: none;
+  }
 </style>
